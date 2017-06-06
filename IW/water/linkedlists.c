@@ -10,8 +10,14 @@ block_t *NewNode(const int *p_data, int row, int col, int idx)
 	new_node->x = row;
 	new_node->y = col;
 	new_node->height = p_data[idx];
-	if (max != INT_MIN)
+	if (max == INT_MIN || new_node->height > max)
+	{
+		new_node->volume = 0;
+	}
+	else
+	{
 		new_node->volume = max - new_node->height;
+	}
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);

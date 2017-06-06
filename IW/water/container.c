@@ -2,7 +2,7 @@
 
 int row_size = 0;
 int col_size = 0;
-int max = INT_MIN;
+int max = 0;
 
 int CalcContainedWater(const int *p_data, int num_columns, int num_rows)
 {
@@ -13,6 +13,7 @@ int CalcContainedWater(const int *p_data, int num_columns, int num_rows)
 	head = NULL;
 	row_size = num_rows;
 	col_size = num_columns;
+	max = INT_MIN;
 	tot_volume = 0;
 	memset(status, 0, sizeof(status));
 	CreateList(&head, p_data, status);
@@ -27,10 +28,11 @@ int CalcContainedWater(const int *p_data, int num_columns, int num_rows)
 		min = RemoveMin(&head);
 		if (min->height >= max)
 			max = min->height;
-		CheckNeighbor(&head, p_data, status, x + 1, y);
-		CheckNeighbor(&head, p_data, status, x, y + 1);
-		CheckNeighbor(&head, p_data, status, x - 1, y);
-		CheckNeighbor(&head, p_data, status, x, y - 1);
+		CheckNeighbor(&head, p_data, status, min->x + 1, min->y);
+		CheckNeighbor(&head, p_data, status, min->x, min->y + 1);
+		CheckNeighbor(&head, p_data, status, min->x - 1, min->y);
+		CheckNeighbor(&head, p_data, status, min->x, min->y - 1);
+		printf("volume is %d\n", min->volume);
 		tot_volume += min->volume;
 		free(min);
 	}
