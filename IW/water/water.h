@@ -28,5 +28,5 @@ int CalcContainedWater(const int *p_data, int num_columns, int num_rows);
 block_t *NewNode(const int *p_data, int row, int col, int idx);
 block_t *AddNode(block_t **head, const int *p_data, int row, int col, int idx);
 block_t *CreateList(block_t **head, const int *p_data, int (*status)[col_size]);
-
+block_t *RemoveMin(block_t **head);
 #endif
