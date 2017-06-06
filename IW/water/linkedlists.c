@@ -1,5 +1,13 @@
 #include "water.h"
 
+/**
+ * NewNode - function that creates a new node based on position and value
+ * @p_data: input array to extract 'height' parameter from
+ * @row: row of the value
+ * @col: column of the value
+ * @idx: index position in p_data, based on row and column
+ * Return: the new_node that is created using info passed as func params
+ */
 block_t *NewNode(const int *p_data, int row, int col, int idx)
 {
 	block_t *new_node;
@@ -23,6 +31,15 @@ block_t *NewNode(const int *p_data, int row, int col, int idx)
 	return (new_node);
 }
 
+/**
+ * AddNode - function to add a node to a linked list, ordered min to max
+ * @head: the head of the linked list
+ * @p_data: input array with data needed
+ * @row: row of the value
+ * @col: column of the value
+ * @idx: index position of value in p_data array, based on row and column
+ * Return: the new_node that is added to the linked list
+ */
 block_t *AddNode(block_t **head, const int *p_data, int row, int col, int idx)
 {
 	block_t *temp, *new_node;
@@ -67,6 +84,13 @@ block_t *AddNode(block_t **head, const int *p_data, int row, int col, int idx)
 	return (new_node);
 }
 
+/**
+ * CreateList - Creating an initial linked list with the border values of matrix
+ * @head: beginning of linked list
+ * @p_data: input array to extract values from
+ * @status: array of row_size x col_size that keeps track of visiting status
+ * Return: nothing, void function
+ */
 void CreateList(block_t **head, const int *p_data, int (*status)[col_size])
 {
 	int x, y, idx;
@@ -87,6 +111,11 @@ void CreateList(block_t **head, const int *p_data, int (*status)[col_size])
 	}
 }
 
+/**
+ * RemoveMin - Removes the node with the smallest 'height' from the linked list
+ * @head: the head of the linked list
+ * Return: The node that is removed, so that the function can still use the data
+ */
 block_t *RemoveMin(block_t **head)
 {
 	block_t *temp, *min;

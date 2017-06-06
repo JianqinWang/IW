@@ -1,5 +1,9 @@
 #include "water.h"
 
+/**
+ * main - main function that is used to test input
+ * Return: 0 for success;
+ */
 int main(void)
 {
 	int array1[] = {1, 2, 3, 5,
