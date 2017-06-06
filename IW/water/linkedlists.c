@@ -21,24 +21,88 @@ block_t *AddNode(block_t **head, const int *p_data, int row, int col, int idx)
 {
 	block_t *temp, *new_node;
 
+	if (head == NULL)
+		return (NULL);
 	new_node = NewNode(p_data, row, col, idx);
-
+	temp = *head;
+	if (temp == NULL)
+	{
+		*head = new_node;
+		return (new_node);
+	}
+	if (temp != NULL && temp->height > new_node->height)
+	{
+		new_node->next = temp;
+		temp->prev = new_node;
+		*head = new_node;
+		return (new_node);
+	}
+	while (temp != NULL)
+	{
+		if (temp->height <= new_node->height)
+		{
+			if (temp->next == NULL)
+			{
+				temp->next = new_node;
+				new_node->prev = temp;
+				break;
+			}
+		}
+		else
+		{
+			new_node->next = temp;
+			new_node->prev = temp->prev;
+			temp->prev->next = new_node;
+			temp->prev = new_node;
+			break;
+		}
+		temp = temp->next;
+	}
+	return (new_node);
 }
 
-block_t *CreateList(block_t **head, const int *p_data)
+block_t *CreateList(block_t **head, const int *p_data, int (*status)[col_size])
 {
 	int x, y, idx;
+	block_t *temp;
 
 	for (x = 0; x < row_size; x++)
 	{
-		for (y = 0; y < col_size; j++)
+		for (y = 0; y < col_size; y++)
 		{
 			if ((x == 0 || x == row_size - 1) ||
 			    (y == 0 || y == col_size - 1))
 			{
+				printf("Position at %d, %d\n", x, y);
 				idx = x * col_size + y;
+				status[x][y] = 1;
 				AddNode(head, p_data, x, y, idx);
 			}
 		}
 	}
+	temp = *head;
+	while (temp != NULL)
+	{
+		printf("at %d, %d is height %d and volume %d\n", temp->x, temp->y,
+		       temp->height, temp->volume);
+		temp = temp->next;
+	}
+	return (temp);
+}
+
+block_t *RemoveMin(block_t **head)
+{
+	block_t *temp, *min;
+
+	if (head == NULL)
+		return (NULL);
+	min = *head;
+	if (min == NULL)
+		return (NULL);
+	temp = min->next;
+	if (temp != NULL)
+		temp->prev = NULL;
+	*head = temp;
+	min->next = NULL;
+	return (min);
 }
