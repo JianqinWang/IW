@@ -23,10 +23,12 @@ extern int max;
 
 /* in container.c */
 int CalcContainedWater(const int *p_data, int num_columns, int num_rows);
+void CheckNeighbor(block_t **head, const int *p_data, int (*status)[col_size],
+		   int x, int y);
 
 /* in linkedlists.c */
 block_t *NewNode(const int *p_data, int row, int col, int idx);
 block_t *AddNode(block_t **head, const int *p_data, int row, int col, int idx);
-block_t *CreateList(block_t **head, const int *p_data, int (*status)[col_size]);
+void CreateList(block_t **head, const int *p_data, int (*status)[col_size]);
 block_t *RemoveMin(block_t **head);
 #endif

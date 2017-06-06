@@ -67,10 +67,9 @@ block_t *AddNode(block_t **head, const int *p_data, int row, int col, int idx)
 	return (new_node);
 }
 
-block_t *CreateList(block_t **head, const int *p_data, int (*status)[col_size])
+void CreateList(block_t **head, const int *p_data, int (*status)[col_size])
 {
 	int x, y, idx;
-	block_t *temp;
 
 	for (x = 0; x < row_size; x++)
 	{
@@ -79,21 +78,13 @@ block_t *CreateList(block_t **head, const int *p_data, int (*status)[col_size])
 			if ((x == 0 || x == row_size - 1) ||
 			    (y == 0 || y == col_size - 1))
 			{
-				printf("Position at %d, %d\n", x, y);
+				//printf("Position at %d, %d\n", x, y);
 				idx = x * col_size + y;
 				status[x][y] = 1;
 				AddNode(head, p_data, x, y, idx);
 			}
 		}
 	}
-	temp = *head;
-	while (temp != NULL)
-	{
-		printf("at %d, %d is height %d and volume %d\n", temp->x, temp->y,
-		       temp->height, temp->volume);
-		temp = temp->next;
-	}
-	return (temp);
 }
 
 block_t *RemoveMin(block_t **head)

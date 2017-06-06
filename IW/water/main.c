@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	int array[] = {1, 2, 3, 5,
+	int array1[] = {1, 2, 3, 5,
 		       7, 12, 34, 1,
 		       11, 9, 81, 2,
 		       15, 1, 1, 2};
@@ -19,10 +19,20 @@ int main(void)
 			4, 5, 8, 12, 3, 4, 2,
 			12, 2, 12, 1, 5, 9, 6,
 			6, 5, 8, 12, 4, 11, 10};
+	int array5[] = {0, 1, 0,
+			1, 0, 1,
+			0, 1, 0};
+	int i;
 
-	CalcContainedWater(array, 4, 4);
-	CalcContainedWater(array2, 4, 3);
-	CalcContainedWater(array3, 3, 3);
-	CalcContainedWater(array4, 7, 7);
+	i = CalcContainedWater(array1, 4, 4);
+	printf("array1 holds volume %d\n", i);
+	i = CalcContainedWater(array2, 4, 3);
+	printf("array2 holds volume %d\n", i);
+	i = CalcContainedWater(array3, 3, 3);
+	printf("array3 holds volume %d\n", i);
+	i = CalcContainedWater(array4, 7, 7);
+	printf("array4 holds volume %d\n", i);
+	i = CalcContainedWater(array5, 3, 3);
+	printf("array5 holds volume %d\n", i);
 	return (0);
 }
