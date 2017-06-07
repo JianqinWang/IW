@@ -36,17 +36,28 @@ void SetVectorParameterAsLargestDP( char* p_param_name, SVector4* src1, SVector4
 
 	// Create a temporary array for intermediate results.
 	// float* p_temp = new float[num_vectors];
-	/* in C, new doesn't work. */
-	float p_temp[num_vectors];
-	float biggest_dot_product;
-	unsigned int limit = num_vectors;
+	/* in C, new doesn't work. There was also no delete/free to correspond to the memory
+	   allocation
+	   We also do not need an array to store all the values, as we only need largest val
+	   We change the p_temp float array to simply be a float variable
+	   Previously, limit was set to be num_vectors, but at that point in the program
+	   num_vectors was already -1, thus it could not execute the 2nd loop.
+	   Since we are removing the array, we also no longer need the limit variable
+	   In the original code, biggest_dot_product was never initialized. here we will
+	   initialize it to be -FLT_MAX. */
+	float p_temp;
+	float biggest_dot_product = -FLT_MAX;
 
 	// Calculate the 3-element dot product, store it in our temp array.
 	/* decrement num_vectors by 1 to avoid invalid array index */
 	--num_vectors;
 	while( num_vectors >= 0 )
 	{
-		p_temp[num_vectors] = CalculateDotProduct( &src1[num_vectors], &src2[num_vectors] );
+		p_temp = CalculateDotProduct( &src1[num_vectors], &src2[num_vectors] );
+		/* compare p_temp to biggest_dot_product, update biggest_dot_product
+		   if p_temp is larger*/
+		if (p_temp > biggest_dot_product)
+			biggest_dot_product = p_temp;
 		--num_vectors;
 	}
 
@@ -56,21 +67,19 @@ void SetVectorParameterAsLargestDP( char* p_param_name, SVector4* src1, SVector4
 	//unsigned int limit = num_vectors;
 
 	// Find the biggest dot product of all the entries.
-	/* initialize variable biggest_dot_product to be first val in array*/
-	biggest_dot_product = p_temp[0];
-	/* change initial dp val to 1 because p_temp[0] will never be > than p_temp[0] */
+	/* this loop is no longer necessary
 	for( unsigned int dp = 1; dp < limit; ++dp )
 	{
 		if( p_temp[dp] > biggest_dot_product )
 		{
 			biggest_dot_product = p_temp[dp];
 		}
-	}
+	} */
 
 	// Find the named parameter so we can set the value.
 	for( unsigned int p = 0; p < ShaderFloatParameterTableNumEntries; ++p )
 	{
-		/* changing function to be strcmp */
+		/* changing function from strstr to be strcmp */
 		if( strcmp( p_param_name, pShaderFloatParameterTable[p].mp_name ) == 0 )
 		{
 			// We found a match! Set the value.
