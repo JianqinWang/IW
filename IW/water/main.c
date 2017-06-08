@@ -26,6 +26,9 @@ int main(void)
 	int array5[] = {0, 1, 0,
 			1, 0, 1,
 			0, 1, 0};
+	int array6[] = {1, 4, 3, 1, 3, 2,
+			3, 2, 1, 3, 2, 4,
+			2, 3, 3, 2, 3, 1};
 	int i;
 
 	i = CalcContainedWater(array1, 4, 4);
@@ -38,5 +41,7 @@ int main(void)
 	printf("array4 holds volume %d\n", i);
 	i = CalcContainedWater(array5, 3, 3);
 	printf("array5 holds volume %d\n", i);
+	i = CalcContainedWater(array6, 6, 3);
+	printf("array6 holds volume %d\n", i);
 	return (0);
 }

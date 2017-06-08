@@ -1,3 +1,5 @@
+This code was completed on Ubuntu 16.04.2 LTS
+
 #This is the debugging section of the take home exam
 
 List of bugs noticed (line numbers used are from original_code.c)

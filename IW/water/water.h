@@ -7,6 +7,15 @@
 #include <unistd.h>
 #include <limits.h>
 
+/**
+ * struct block_s - a structure to hold all info on a data point in matrix
+ * @x: row that the value 'height' is from
+ * @y: column that the value 'height' is from
+ * @height: the value at x, y in the given matrix
+ * @volume: the volume of water that is held at the data point in the matrix
+ * @prev: previous node in linked list
+ * @next: next node in linked list
+ */
 typedef struct block_s
 {
 	int x;
@@ -17,6 +26,12 @@ typedef struct block_s
 	struct block_s *next;
 } block_t;
 
+/**
+ * 3 global variables
+ * row_size: the number of rows in the matrix, as input in function CalcContainedWater
+ * col_size: the number of columns in the matrix, as input in function CalcContainedWater
+ * max: the max height of water relative to the 'barrier' (the linked list)
+ */
 extern int row_size;
 extern int col_size;
 extern int max;
