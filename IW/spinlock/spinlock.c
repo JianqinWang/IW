@@ -36,7 +36,7 @@ void *thread1(void *arg)
 	return (arg);
 }
 
-/**
+ /**
  * thread2 - the spinlock process for thread 2, also continuously trying to access
  * Destination
  * @arg: NULL argument
